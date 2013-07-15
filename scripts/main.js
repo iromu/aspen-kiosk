@@ -1,12 +1,16 @@
-var baseUrl = "file:///C:/ASPEN/ubu.com/aspen/";
-var mainUrl = "file:///C:/ASPEN/ubu.com/aspen/index.html";
+var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
-//var baseUrl = "file:///Volumes/OSX/Users/wantez/websites/ASPEN/ubu.com/aspen/";
-//var mainUrl = "file:///Volumes/OSX/Users/wantez/websites/ASPEN/ubu.com/aspen/index.html";
+if (!isMac) {
+    var baseUrl = "file:///C:/ASPEN/ubu.com/aspen/";
+    var mainUrl = "file:///C:/ASPEN/ubu.com/aspen/index.html";
+} else {
+    var baseUrl = "file:///Users/Shared/websites/ASPEN/ubu.com/aspen/";
+    var mainUrl = "file:///Users/Shared/websites/ASPEN/ubu.com/aspen/index.html";
+}
 
 $(document).ready(function () {
 
-    $(document).bind("contextmenu",function(e){
+    $(document).bind("contextmenu", function (e) {
         return false;
     });
 
@@ -33,7 +37,7 @@ $(document).ready(function () {
         $(this).hide();
         var contents = $(this).contents();
 
-        contents.bind("contextmenu",function(e){
+        contents.bind("contextmenu", function (e) {
             e.preventDefault();
             e.stopPropagation();
             return false;
@@ -46,8 +50,8 @@ $(document).ready(function () {
 
             $(this).fadeIn();
 
-            if(baseTag.href !== null)
-               contents.find('head').append(baseTag);
+            if (baseTag.href !== null)
+                contents.find('head').append(baseTag);
 
             contents.find("table:first").css("display", "none");
             contents.find('a[href*="http"]').css("display", "none");
@@ -62,10 +66,10 @@ $(document).ready(function () {
                 var href = currentAnchor.attr('href');
                 baseTag.href = null;
 
-                if (href.indexOf('#') === 0 ) {
+                if (href.indexOf('#') === 0) {
                     baseTag.href = null;
 
-                } else if ( href.indexOf('javascript:newPage') === 0) {
+                } else if (href.indexOf('javascript:newPage') === 0) {
                     //contents.find('head').append(baseTag);
 
                 } else if (href.indexOf('javascript:') === 0) {
